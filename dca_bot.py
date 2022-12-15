@@ -54,8 +54,9 @@ while True:
         if BULO in excess:
             amount = excess[BULO]
             print(f"Excess: {amount}")
-            # We might just let the excess accumulate rather than redeeming if its < 1 TinyUSDC
-            if amount > 0:
+            # This will redeem for any amount over 1000 BULO.  The idea being that you don't want to redeem after every single buy but
+            # wait for some reasonable amount to build up.
+            if amount > 1000:
                 transaction_group = pool.prepare_redeem_transactions(amount)
                 transaction_group.sign_with_private_key(
                     account["address"], account["private_key"]
